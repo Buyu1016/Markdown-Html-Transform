@@ -10,10 +10,11 @@ body{
     border-right: 1px solid #aaa;
     position: fixed;
     top: 0;
-    left: 0;
+    left: -300px;
     box-shadow: 2px 0 5px 3px #aaa;
     padding: 10px 0 0 0;
     box-sizing: border-box;
+    transition: left 0.5s;
 }
 .sidebar-title {
     padding: 10px;
@@ -30,10 +31,25 @@ body{
 .sidebar-content div a {
     font-size: 20px;
 }
+/* 内容区 */
 .content {
     box-sizing: border-box;
-    width: calc(100% - 300px);
+    width: 100%;
     height: 100%;
     padding: 20px 20px 0 30px;
-    margin-left: 300px;
+    position: relative;
+    transition: margin-left 0.5s;
+}
+.loading-lock {
+    position: absolute;
+    top: 5px;
+    left: 20px;
+    padding: 7px 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    cursor: pointer;
+    box-shadow: 0 0 8px 1px #aaa;
+}
+.loading-lock:active {
+    box-shadow: inset 0 0 8px 1px #aaa;
 }

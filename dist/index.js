@@ -104,7 +104,7 @@ eval("var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*!\n * jQ
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-eval("const $ = __webpack_require__(/*! jquery */ \"./node_modules/.pnpm/jquery@3.6.0/node_modules/jquery/dist/jquery.js\")\n\nconst oH1s = $('h1');\nconst sidebar = $('.sidebar-content')\nlet createAs = ''\nlet index = 1\nfor (let i = 0; i < oH1s.length; i++) {\n    createAs += `<div><a href='#item${index++}'>${oH1s[i].outerText}</a></div>`   \n}\n// console.log(sidebar)\n// console.log(sidebar.eq(0))\nsidebar.eq(0).append(createAs)\n\n//# sourceURL=webpack:///./target/index.js?");
+eval("const $ = __webpack_require__(/*! jquery */ \"./node_modules/.pnpm/jquery@3.6.0/node_modules/jquery/dist/jquery.js\")\n\nconst oH1s = $('h1');\nconst sidebar = $('.sidebar-content')\nlet createAs = ''\nlet index = 1\nfor (let i = 0; i < oH1s.length; i++) {\n    createAs += `<div><a href='#item${index++}'>${oH1s[i].outerText}</a></div>`   \n}\n// console.log(sidebar)\n// console.log(sidebar.eq(0))\nsidebar.eq(0).append(createAs)\n\n// 控制侧边栏显示与隐藏\nconst oLock = $('.loading-lock')\nconst oSideBar = $('.sidebar')\nconst oContent = $('.content')\n\nlet lock = false // 默认侧边栏不显示\noLock.on('click', () => {\n    if (!lock) { // 缩小\n        oSideBar.css('left', '0')\n        oContent.css('margin-left', '300px')\n        oLock.text('展开 >>>')\n        lock = true\n    } else {\n        oSideBar.css('left', '-300px')\n        oContent.css('margin-left', '0')\n        oLock.text('<<< 隐藏')\n        lock = false\n    }\n})\n\n//# sourceURL=webpack:///./target/index.js?");
 
 /***/ })
 
