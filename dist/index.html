@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./css/markdown.css">
+    <title>Markdown</title>
+</head>
+<body>
+    <!-- sidebar为侧边栏区域，请不要更改 -->
+<div class="sidebar">
+    <div class="sidebar-title">
+        <span>by CodeGorgeous</span>
+    </div>
+    <div class="sidebar-content"></div>
+</div>
+<div class="content">
+<span class="loading-lock">展开>></span>
+<h1 id="icon-图标">Icon 图标</h1>
+<p><strong>API</strong></p>
+<table>
+<thead>
+<tr>
+<th>属性</th>
+<th>说明</th>
+<th>类型</th>
+<th>默认值</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>type</td>
+<td>icon样式代码</td>
+<td>String</td>
+<td>无</td>
+</tr>
+<tr>
+<td>size</td>
+<td>icon样式大小</td>
+<td>Number</td>
+<td>16</td>
+</tr>
+<tr>
+<td>color</td>
+<td>icon样式颜色</td>
+<td>String</td>
+<td>#ccc</td>
+</tr>
+</tbody></table>
+<p><strong>示例图</strong></p>
+<p><img src="./image/icon.jpeg" alt="Icon示例图"></p>
+<p><strong>Icon样式代码</strong></p>
+<p><img src="./image/icon1.jpeg" alt="代码1">
+<img src="./image/icon2.jpeg" alt="代码1">
+<img src="./image/icon3.jpeg" alt="代码1">
+<img src="./image/icon4.jpeg" alt="代码1">
+<img src="./image/icon5.jpeg" alt="代码1">
+<img src="./image/icon6.jpeg" alt="代码1"></p>
+<h1 id="button-按钮">Button 按钮</h1>
+<p><strong>API</strong></p>
+<table>
+<thead>
+<tr>
+<th>属性</th>
+<th>说明</th>
+<th>类型</th>
+<th>默认值</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>type</td>
+<td>按钮类型</td>
+<td>String</td>
+<td>无</td>
+</tr>
+<tr>
+<td>disabled</td>
+<td>禁用按钮</td>
+<td>Boolean</td>
+<td>false</td>
+</tr>
+<tr>
+<td>ghost</td>
+<td>背景是否透明化</td>
+<td>Boolean</td>
+<td>false</td>
+</tr>
+</tbody></table>
+<p><strong>示例图</strong></p>
+<p><img src="./image/button.jpeg" alt="Button示例图"></p>
+
+</div>
+<script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script>
+const oH1s = $('h1');
+const sidebar = $('.sidebar-content')
+let createAs = ''
+let index = 1
+for (let i = 0; i < oH1s.length; i++) {
+    createAs += `<div><a href='#item${index++}'>${oH1s[i].outerText}</a></div>`   
+}
+sidebar.eq(0).append(createAs)
+
+// 控制侧边栏显示与隐藏
+const oLock = $('.loading-lock')
+const oSideBar = $('.sidebar')
+const oContent = $('.content')
+
+let lock = false // 默认侧边栏不显示
+oLock.on('click', () => {
+    if (!lock) { // 缩小
+        oSideBar.css('left', '0')
+        oContent.css('margin-left', '300px')
+        oLock.text('展开 >>')
+        lock = true
+    } else {
+        oSideBar.css('left', '-300px')
+        oContent.css('margin-left', '0')
+        oLock.text('<< 隐藏')
+        lock = false
+    }
+})
+</script>
+</body>
+</html>

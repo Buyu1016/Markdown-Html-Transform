@@ -41,7 +41,7 @@ function markdownHtmlTransform(path, filename = 'index', imageFile) {
                 // 深度复制资源
                 copyResources(imageFile, imageFile)
             } else {// 路径为一张图片
-                const img = readFileContent(imageFile)
+                const img = fs.readFileSync(imageFile)
                 writeFileContent(resolve(__dirname, '..', '..', 'dist', basename(imageFile)), img)
             }
         } else {
@@ -79,7 +79,7 @@ function copyResources(folderPath, imageFile) {
         // item为文件/文件夹名字
         const newPath = (resolve(folderPath, item)).replace(imageFile, resolve(__dirname, '..', '..', 'dist', basename(imageFile)))
         if (isFile(resolve(folderPath, item))) { // 如果是文件则直接读取文件
-            const fileContent = readFileContent(resolve(folderPath, item))
+            const fileContent = fs.readFileSync(resolve(folderPath, item))
             writeFileContent(newPath, fileContent)
         } else {
             fs.mkdirSync(newPath)
