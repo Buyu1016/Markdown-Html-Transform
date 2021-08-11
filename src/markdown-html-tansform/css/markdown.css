@@ -68,9 +68,6 @@ a:hover {
     text-decoration: none;
     color: #ff6600;
 }
-a:visited {
-    /*color: purple;*/
-}
 ul, ol {
     padding: 0;
     padding-left: 18px;

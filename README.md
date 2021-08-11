@@ -1,8 +1,8 @@
 # Markdown-Html-Transform
 
-> Markdown转换Html的Plugin
+**v2.0.0**
 
-> 适用于Webpack上
+> Markdown转换html生成配套文件
 
 **CLI**
 > npm install
@@ -23,9 +23,9 @@
 
 > [marked](https://www.npmjs.com/package/marked)
 
-> [webpack](https://webpack.docschina.org/)
+> [webpack](https://webpack.docschina.org/) **v2.0.0已弃用**
 
-> [webpack-cli](https://www.npmjs.com/package/webpack-cli)
+> [webpack-cli](https://www.npmjs.com/package/webpack-cli) **v2.0.0已弃用**
 
 ## 版本迭代记录
 
@@ -46,3 +46,9 @@
 > 时间: 2021-08-10
 
 **更新内容:** 调整webpack设置, 改变一些文件资源的位置
+
+> v2.0.0
+
+> 时间: 2021-08-11
+
+**更新内容:** 重构包框架，采用node进行开发
