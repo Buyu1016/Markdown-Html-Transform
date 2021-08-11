@@ -1,6 +1,6 @@
 # Icon 图标
 
-**API**
+## API
 
 | 属性 | 说明 | 类型 | 默认值 |
 | - | - | - | - |
@@ -8,7 +8,7 @@
 | size | icon样式大小 | Number | 16 |
 | color | icon样式颜色 | String | #ccc |
 
-**示例图**
+## 示例图
 
 ![Icon示例图](./image/icon.jpeg)
 
@@ -23,7 +23,7 @@
 
 # Button 按钮
 
-**API**
+## API
 
 | 属性 | 说明 | 类型 | 默认值 |
 | - | - | - | - |
@@ -31,6 +31,6 @@
 | disabled | 禁用按钮 | Boolean | false |
 | ghost | 背景是否透明化 | Boolean | false |
 
-**示例图**
+## 示例图
 
 ![Button示例图](./image/button.jpeg)

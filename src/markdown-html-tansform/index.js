@@ -23,9 +23,17 @@ function markdownHtmlTransform(path, filename = 'index', imageFile) {
     const temeplateContent = readFileContent(resolve(__dirname, 'temeplate.html'))
     // 利用marked库将markdown转换为html
     const renderer = {
-        index: 1,
+        index: 0,
+        index_h2: 1,
         heading(text, level) {
-          return `<h${level} id='item${renderer.index++}'>${text}</h${level}>\n`;
+            if (level === 1) {
+                renderer.index_h2 = 1;
+                return `<h${level} id='item${++renderer.index}'>${text}</h${level}>\n`;
+            } else if (level === 2) {
+                return `<h${level} id='item${renderer.index}-${renderer.index_h2++}'>${text}</h${level}>\n`;
+            } else {
+                return `<h${level}>${text}</h${level}>\n`;
+            }
         }
     };
     marked.use({ renderer })

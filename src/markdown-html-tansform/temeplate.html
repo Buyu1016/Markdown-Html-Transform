@@ -14,9 +14,11 @@
     </div>
     <div class="sidebar-content"></div>
 </div>
+<div class="markdown-box">
 <div class="content">
 <span class="loading-lock">展开>></span>
 <!-- content -->
+</div>
 </div>
 <script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 <script>
@@ -39,12 +41,13 @@ oLock.on('click', () => {
     if (!lock) { // 缩小
         oSideBar.css('left', '0')
         oContent.css('margin-left', '300px')
-        oLock.text('展开 >>')
+        oLock.text('<< 隐藏')
         lock = true
     } else {
         oSideBar.css('left', '-300px')
         oContent.css('margin-left', '0')
-        oLock.text('<< 隐藏')
+        $('.markdown-box').css('width', '70%')
+        oLock.text('展开 >>')
         lock = false
     }
 })
