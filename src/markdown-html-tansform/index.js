@@ -13,25 +13,35 @@ function markdownHtmlTransform(path, filename = 'index', imageFile) {
     if (!path) {
         throw new Error('Please fill in the file path in the configuration')
     }
+    if (!fs.existsSync(path)) {
+        throw new Error('Please enter the correct markdown file path')
+    }
     // 第一步应该读取各种需要的文件
     // 读取目标markdown文件内容
     const markdownContent = readFileContent(path)
     // 读取模版html文件内容
     const temeplateContent = readFileContent(resolve(__dirname, 'temeplate.html'))
     // 利用marked库将markdown转换为html
+    const renderer = {
+        index: 1,
+        heading(text, level) {
+          return `<h${level} id='item${renderer.index++}'>${text}</h${level}>\n`;
+        }
+    };
+    marked.use({ renderer })
     const htmlString = marked(markdownContent)
     // 将html插入到模版html中
     const newHtml = temeplateContent.replace('<!-- content -->', htmlString)
     // 创建并写入
-    console.log('>>>>>>>>>>>>>正在创建并写入内容<<<<<<<<<<<<<')
+    console.log('>>>*正在创建并写入内容*<<<')
     fs.rmdirSync(resolve(__dirname, '..', '..', 'dist'), {
         recursive: true
     })
-    console.log('>>>>>>>>>>>>>>>正在创建文件夹<<<<<<<<<<<<<<<')
+    console.log('>>>***正在创建文件夹***<<<')
     fs.mkdirSync(resolve(__dirname, '..', '..', 'dist'))
     fs.mkdirSync(resolve(__dirname, '..', '..', 'dist', 'css'))
     // 复制css文件资源
-    const cssContent = readFileContent(resolve(__dirname, 'css/markdown.css'))
+    const cssContent = readFileContent(resolve(__dirname, 'css', 'markdown.css'))
     writeFileContent(resolve(__dirname, '..', '..', 'dist', 'css', 'markdown.css'), cssContent)
     if (imageFile) { // 表示是有图片文件夹的
         if (fs.existsSync(imageFile)) { // 查看文件夹路径是否正确
@@ -49,7 +59,7 @@ function markdownHtmlTransform(path, filename = 'index', imageFile) {
         }
     }
     writeFileContent(resolve(__dirname, '..', '..', 'dist', `${filename}.html`), newHtml)
-    console.log('>>>>>>>>>>>>>创建并写入内容成功<<<<<<<<<<<<<')
+    console.log('>>>*创建并写入内容成功*<<<')
 }
 
 /**
