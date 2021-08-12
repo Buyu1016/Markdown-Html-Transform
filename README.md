@@ -7,8 +7,14 @@
 **CLI**
 > npm install
 
+**使用示例**
+
 ```
-示例代码:
+// 调用markdown-html-transform向外导出的函数
+const { markdownHtmlTransform } = require('../src/markdown-html-tansform/index')
+
+// markdownHtmlTransform(模版绝对路径, 输出文件名, 图片文件夹 | 图片 )
+markdownHtmlTransform(resolve(__dirname, 'index.md'), 'index', resolve(__dirname, 'image'))
 ```
 
 **所需环境**
@@ -64,3 +70,9 @@
 > 时间: 2021-08-11
 
 **更新内容:** 修复侧边栏无法跳转锚点功能
+
+> v2.3.0
+
+> 时间: 2021-08-12
+
+**更新内容:** 新增侧边栏标签能实时确定当前处于哪个标签范围内, 新增Top回到顶部按钮

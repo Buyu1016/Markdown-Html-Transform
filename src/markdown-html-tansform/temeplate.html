@@ -20,6 +20,8 @@
 <!-- content -->
 </div>
 </div>
+<!-- 回到顶部按钮 -->
+<div class="backTop">Top</div>
 <script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 <script>
 const oH1s = $('h1');
@@ -46,11 +48,60 @@ oLock.on('click', () => {
     } else {
         oSideBar.css('left', '-300px')
         oContent.css('margin-left', '0')
-        $('.markdown-box').css('width', '70%')
         oLock.text('展开 >>')
         lock = false
     }
 })
+
+// 设置侧边栏默认选中
+if ($('a')) {
+    $(`a[href='#item1']`).css('color', '#ff6600')
+}
+
+// 回到顶部
+let windowHeight = window.innerHeight;
+let scrollTop;
+window.addEventListener('scroll', (e) => {
+    scrollTop = $(document).scrollTop();
+    if (scrollTop - windowHeight > 100) {
+        $('.backTop').css('display', 'inline-block')
+    } else {
+        $('.backTop').css('display', 'none')
+    }
+    // 侧边栏某个元素是否亮起
+    let current;
+    for (const iterator of oH1s) {
+        let distance = iterator.offsetTop - scrollTop
+        // console.log('>>当前元素:', iterator, '>>当前距离视口距离:', distance)
+        if (distance >= 0 && distance <= windowHeight) {
+            current = iterator
+            // console.log('>>>>>>当前位于页面的元素是:', iterator)
+        } else if (distance < 0 && !current) {
+            current = iterator
+        }
+    }
+    for (const iterator of $('.sidebar-content a')) {
+        iterator.style.color = '#0099ff'
+    }
+    $(`a[href='#${$(current).attr('id')}']`).css('color', '#ff6600')
+})
+
+$('.backTop').on('click', () => {
+    let timer = null;
+    if (scrollTop - windowHeight > 100) { // 说明现在不处于页面顶部，点击应该scroll为0
+        timer = setInterval(() => {
+            if (scrollTop <= 0) {
+                scrollTop = 0
+                $(document).scrollTop(scrollTop)
+                clearInterval(timer)
+            } else {
+                scrollTop = scrollTop - 100;
+                $(document).scrollTop(scrollTop)
+            }
+        });
+    }
+})
+
 </script>
 </body>
 </html>
