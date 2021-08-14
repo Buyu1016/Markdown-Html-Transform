@@ -67,7 +67,7 @@ function markdownHtmlTransform(path, filename = 'index', imageFile) {
         }
     }
     writeFileContent(resolve(__dirname, '..', '..', 'dist', `${filename}.html`), newHtml)
-    console.log('>>>*创建并写入内容成功*<<<')
+    console.log('>>>**Markdown转换完成**<<<')
 }
 
 /**
