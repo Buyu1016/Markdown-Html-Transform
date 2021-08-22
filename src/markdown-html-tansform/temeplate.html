@@ -73,10 +73,10 @@ window.addEventListener('scroll', (e) => {
     for (const iterator of oH1s) {
         let distance = iterator.offsetTop - scrollTop
         // console.log('>>当前元素:', iterator, '>>当前距离视口距离:', distance)
-        if (distance >= 0 && distance <= windowHeight) {
+        if (distance >= 0 && distance <= windowHeight/2) {
             current = iterator
-            // console.log('>>>>>>当前位于页面的元素是:', iterator)
-        } else if (distance < 0 && !current) {
+            console.log('>>>>>>当前位于页面的元素是:', iterator, distance, windowHeight)
+        } else if (distance < 0) {
             current = iterator
         }
     }

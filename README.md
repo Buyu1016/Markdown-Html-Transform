@@ -76,3 +76,9 @@ markdownHtmlTransform(resolve(__dirname, 'index.md'), 'index', resolve(__dirname
 > 时间: 2021-08-12
 
 **更新内容:** 新增侧边栏标签能实时确定当前处于哪个标签范围内, 新增Top回到顶部按钮
+
+> v2.3.1
+
+> 2021-08-22
+
+**更新内容:** 修复侧边栏显示不正确问题
