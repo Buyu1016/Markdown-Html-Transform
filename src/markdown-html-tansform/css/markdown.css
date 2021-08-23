@@ -293,3 +293,11 @@ body{
     border-radius: 50%;
     cursor: pointer;
 }
+/* 表格内容居中 */
+.content table td[align="center"] {
+    text-align: center;
+}
+/* 表格内容靠右 */
+.content table td[align="right"] {
+    text-align: right;
+}
