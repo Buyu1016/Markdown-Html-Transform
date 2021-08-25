@@ -91,6 +91,12 @@ markdownHtmlTransform(resolve(__dirname, 'index.md'), 'index', resolve(__dirname
 
 > v2.3.3
 
-> 2021-08-23
+> 2021-08-25
 
 **更新内容:** 修改侧边栏显示代码思路
+
+> v2.3.4
+
+> 2021-08-25
+
+**更新内容:** 修改侧边栏内容区样式
