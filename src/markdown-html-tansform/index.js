@@ -6,7 +6,7 @@ const marked = require('marked')
  * Markdown-Html-Transform主要转换函数
  * @param { String } path 文件路径
  * @param { String } filename 输出文件名
- * @param { Boolean } imageFile mage文件夹路径
+ * @param { Boolean } imageFile image文件夹路径
  */
 function markdownHtmlTransform(path, filename = 'index', imageFile) {
     // path为必须

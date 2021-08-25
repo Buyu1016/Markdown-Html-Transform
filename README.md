@@ -88,3 +88,9 @@ markdownHtmlTransform(resolve(__dirname, 'index.md'), 'index', resolve(__dirname
 > 2021-08-23
 
 **更新内容:** 新增table中内容居中效果和靠右效果
+
+> v2.3.3
+
+> 2021-08-23
+
+**更新内容:** 修改侧边栏显示代码思路
