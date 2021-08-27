@@ -5,6 +5,7 @@
 > Markdown转换html生成配套文件
 
 **CLI**
+
 > npm install
 
 **使用示例**
@@ -16,6 +17,10 @@ const { markdownHtmlTransform } = require('../src/markdown-html-tansform/index')
 // markdownHtmlTransform(模版绝对路径, 输出文件名, 图片文件夹 | 图片 )
 markdownHtmlTransform(resolve(__dirname, 'index.md'), 'index', resolve(__dirname, 'image'))
 ```
+
+**运行配置好的api.js文件**
+
+> npm start
 
 **所需环境**
 > node
@@ -100,3 +105,9 @@ markdownHtmlTransform(resolve(__dirname, 'index.md'), 'index', resolve(__dirname
 > 2021-08-25
 
 **更新内容:** 修改侧边栏内容区样式
+
+> v2.3.5
+
+> 2021-08-27
+
+**更新内容:** 修改内容区域样式问题
