@@ -111,3 +111,9 @@ markdownHtmlTransform(resolve(__dirname, 'index.md'), 'index', resolve(__dirname
 > 2021-08-27
 
 **更新内容:** 修改内容区域样式问题
+
+> v2.3.6
+
+> 2021-08-27
+
+**更新内容:** 撤销内容区域横向滚动条,内容区域居中样式修复
