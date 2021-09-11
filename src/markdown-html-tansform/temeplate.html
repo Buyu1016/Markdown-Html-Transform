@@ -10,18 +10,22 @@
     <!-- sidebar为侧边栏区域，请不要更改 -->
 <div class="sidebar">
     <div class="sidebar-title">
-        <span>by CodeGorgeous</span>
+        <span class="sidebar-author">by <a href="http://www.codegorgeous.top" target="_blank">CodeGorgeous</a></span>
+        <span class="sidebar-github"><a href="https://github.com/CodeGorgeous/Markdown-Html-Transform.git" target="_blank">GitHub</a></span>
     </div>
     <div class="sidebar-content"></div>
 </div>
 <div class="markdown-box">
 <div class="content">
-<span class="loading-lock">展开>></span>
 <!-- content -->
 </div>
 </div>
+<!-- 控制侧边栏开关 -->
+<span class="loading-lock">></span>
 <!-- 回到顶部按钮 -->
-<div class="backTop">Top</div>
+<div class="backTop">
+    <img src="http://qiniu.codegorgeous.top/top.png" alt="Top">
+</div>
 <script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 <script>
 const oH1s = $('h1');
@@ -43,12 +47,14 @@ oLock.on('click', () => {
     if (!lock) { // 缩小
         oSideBar.css('left', '0')
         oContent.css('margin-left', '300px')
-        oLock.text('<< 隐藏')
+        oLock.css('left', '320px')
+        oLock.text('<')
         lock = true
     } else {
         oSideBar.css('left', '-300px')
         oContent.css('margin-left', '0')
-        oLock.text('展开 >>')
+        oLock.css('left', '20px')
+        oLock.text('>')
         lock = false
     }
 })

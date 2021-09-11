@@ -117,3 +117,9 @@ markdownHtmlTransform(resolve(__dirname, 'index.md'), 'index', resolve(__dirname
 > 2021-08-27
 
 **更新内容:** 撤销内容区域横向滚动条,内容区域居中样式修复
+
+> v2.4.0
+
+> 2021-09-11
+
+**更新内容:** 更改回到顶部按钮样式,更改侧边栏控制开关样式
