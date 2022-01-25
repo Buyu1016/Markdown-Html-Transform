@@ -123,3 +123,9 @@ markdownHtmlTransform(resolve(__dirname, 'index.md'), 'index', resolve(__dirname
 > 2021-09-11
 
 **更新内容:** 更改回到顶部按钮样式,更改侧边栏控制开关样式
+
+> v2.5.0
+
+> 2022-01-25
+
+**更新内容:** 更改 Code和Pre代码块样式, 新增字体family, 更新scroll样式, 修复侧边栏无滚动条问题

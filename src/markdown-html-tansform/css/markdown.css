@@ -1,31 +1,56 @@
-body{
+@font-face {
+    font-family: 'family';
+    src: url('http://qiniu.codegorgeous.top/font.ttf');
+}
+
+* {
+    font-family: 'family' !important;
+}
+
+body {
     margin: 0 auto;
-    font-family: "ubuntu", "Tahoma", "Microsoft YaHei", arial,sans-serif;
+    font-family: "ubuntu", "Tahoma", "Microsoft YaHei", arial, sans-serif;
     color: #444444;
     line-height: 1;
     padding: 30px;
 }
+
 img {
     display: block;
     max-width: 100%;
     margin: 0 auto;
 }
+
 @media screen and (min-width: 1000px) {
     body {
         width: 842px;
         margin: 10px auto;
     }
 }
-h1, h2, h3, h4 {
+
+h1,
+h2,
+h3,
+h4 {
     color: #111111;
     font-weight: 400;
     margin-top: 1em;
 }
 
-h1, h2, h3, h4, h5 {
-	font-family: Georgia, Palatino, serif;
+h1,
+h2,
+h3,
+h4,
+h5 {
+    font-family: Georgia, Palatino, serif;
 }
-h1, h2, h3, h4, h5, dl{
+
+h1,
+h2,
+h3,
+h4,
+h5,
+dl {
     margin-bottom: 16px;
     padding: 0;
 }
@@ -34,30 +59,38 @@ p {
     margin-top: 8px;
     margin-bottom: 3px;
 }
+
 h1 {
     font-size: 48px;
     line-height: 54px;
 }
+
 h2 {
     font-size: 36px;
     line-height: 42px;
 }
-h1, h2 {
+
+h1,
+h2 {
     border-bottom: 1px solid #EFEAEA;
     padding-bottom: 10px;
 }
+
 h3 {
     font-size: 24px;
     line-height: 30px;
 }
+
 h4 {
     font-size: 21px;
     line-height: 26px;
 }
+
 h5 {
     font-size: 18px;
     line-height: 23px;
 }
+
 a {
     color: #0099ff;
     margin: 0 2px;
@@ -65,36 +98,48 @@ a {
     vertical-align: baseline;
     text-decoration: none;
 }
+
 a:hover {
     text-decoration: none;
     color: #ff6600;
 }
-ul, ol {
+
+ul,
+ol {
     padding: 0;
     padding-left: 18px;
     margin: 0;
 }
+
 li {
     line-height: 24px;
 }
-p, ul, ol {
+
+p,
+ul,
+ol {
     font-size: 16px;
     line-height: 24px;
 }
 
-ol ol, ul ol {
+ol ol,
+ul ol {
     list-style-type: lower-roman;
 }
 
-code, pre {
+code,
+pre {
     font-family: Consolas, Monaco, Andale Mono, monospace;
-    background-color:#f7f7f7;
-    color: inherit;
+    background-color: #535353;
+    color: #fff;
+    border-radius: 5px;
 }
 
 code {
     font-family: Consolas, Monaco, Andale Mono, monospace;
+    border-radius: 5px;
     margin: 0 2px;
+    padding: 5px 5px;
 }
 
 pre {
@@ -105,7 +150,7 @@ pre {
     border-left: 5px solid #6CE26C;
 }
 
-pre > code {
+pre>code {
     font-family: Consolas, Monaco, Andale Mono, monospace;
     border: 0;
     display: inline;
@@ -117,11 +162,6 @@ pre > code {
     font-size: .95em;
     white-space: pre;
     background: 0 0;
-
-}
-
-code {
-    color: #666555;
 }
 
 aside {
@@ -129,16 +169,19 @@ aside {
     float: right;
     width: 390px;
 }
+
 blockquote {
-    border-left:.5em solid #eee;
+    border-left: .5em solid #eee;
     padding: 0 0 0 2em;
-    margin-left:0;
+    margin-left: 0;
 }
-blockquote  cite {
-    font-size:14px;
-    line-height:20px;
-    color:#bfbfbf;
+
+blockquote cite {
+    font-size: 14px;
+    line-height: 20px;
+    color: #bfbfbf;
 }
+
 blockquote cite:before {
     content: '\2014 \00A0';
 }
@@ -146,6 +189,7 @@ blockquote cite:before {
 blockquote p {
     color: #666;
 }
+
 hr {
     text-align: left;
     color: #999;
@@ -178,10 +222,12 @@ dd {
 }
 
 table {
-    *border-collapse: collapse; /* IE7 and lower */
+    *border-collapse: collapse;
+    /* IE7 and lower */
     border-spacing: 0;
     width: 100%;
 }
+
 table {
     border: solid #ccc 1px;
 }
@@ -193,6 +239,7 @@ table thead {
 table thead tr:hover {
     background: #f7f7f7
 }
+
 table tr:hover {
     background: #fbf8e9;
     -o-transition: all 0.1s ease-in-out;
@@ -201,7 +248,9 @@ table tr:hover {
     -ms-transition: all 0.1s ease-in-out;
     transition: all 0.1s ease-in-out;
 }
-table td, .table th {
+
+table td,
+.table th {
     border-left: 1px solid #ccc;
     border-top: 1px solid #ccc;
     padding: 10px;
@@ -210,20 +259,22 @@ table td, .table th {
 
 table th {
     border-top: none;
-    text-shadow: 0 1px 0 rgba(255,255,255,.5);
+    text-shadow: 0 1px 0 rgba(255, 255, 255, .5);
     padding: 5px;
     border-left: 1px solid #ccc;
 }
 
-table td:first-child, table th:first-child {
+table td:first-child,
+table th:first-child {
     border-left: none;
 }
 
-body{
+body {
     width: 100%;
     height: 100%;
     padding: 0 !important;
 }
+
 .sidebar {
     width: 300px;
     height: 100%;
@@ -236,10 +287,12 @@ body{
     box-sizing: border-box;
     transition: left 0.5s;
 }
+
 .sidebar-title {
     padding: 10px;
     border-bottom: 1px solid #ccc;
 }
+
 .sidebar-title a {
     color: #000000;
     font-weight: bold;
@@ -252,28 +305,37 @@ body{
 .sidebar-title .sidebar-github {
     float: right;
 }
+
 .sidebar-content {
     width: 100%;
-    height: 100%;
+    height: calc(100% - 37px);
     box-sizing: border-box;
     padding: 10px 0 0 20px;
+    overflow-x: hidden;
+    overflow-y: auto;
 }
+
 .sidebar-content div {
     margin: 5px 0px;
 }
+
 .sidebar-content div a {
     display: inline-block;
     font-size: 20px;
     width: 100%;
-    white-space:nowrap;
-    overflow:hidden;
-    text-overflow:ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
+
+
 /* 内容区 */
+
 .markdown-box {
     display: flex;
     justify-content: center;
 }
+
 .content {
     display: inline-block;
     box-sizing: border-box;
@@ -284,6 +346,7 @@ body{
     transition: margin-left 0.5s;
     overflow-x: hidden;
 }
+
 .loading-lock {
     position: fixed;
     top: 20px;
@@ -296,10 +359,14 @@ body{
     transition: left 0.5s;
     background: #FFFFFF;
 }
+
 .loading-lock:active {
     box-shadow: inset 0 0 8px 1px #aaa;
 }
+
+
 /* 回到顶部按钮样式 */
+
 .backTop {
     width: 100px;
     line-height: 50px;
@@ -311,15 +378,52 @@ body{
     border-radius: 50%;
     cursor: pointer;
 }
+
 h1 {
     margin-top: 0;
     padding-top: 1em;
 }
+
+
 /* 表格内容居中 */
+
 .content table td[align="center"] {
     text-align: center;
 }
+
+
 /* 表格内容靠右 */
+
 .content table td[align="right"] {
     text-align: right;
+}
+
+
+/* scroll */
+
+
+/*定义滚动条高宽及背景 高宽分别对应横竖滚动条的尺寸*/
+
+::-webkit-scrollbar {
+    width: 5px;
+    height: 5px;
+    background-color: #F5F5F5;
+}
+
+
+/*定义滚动条轨道 内阴影+圆角*/
+
+::-webkit-scrollbar-track {
+    -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+    border-radius: 10px;
+    background-color: #F5F5F5;
+}
+
+
+/*定义滑块 内阴影+圆角*/
+
+::-webkit-scrollbar-thumb {
+    border-radius: 10px;
+    -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, .3);
+    background-color: #555;
 }
