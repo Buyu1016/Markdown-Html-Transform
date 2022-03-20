@@ -76,8 +76,8 @@ function markdownHtmlTransform(path, filename = 'index', imageFile) {
             throw new Error('The picture folder path is incorrect')
         }
     }
-    writeFileContent(resolve(__dirname, '..', '..', 'dist', `${filename}.html`), newHtml)
-    console.log('>>>**Markdown转换完成**<<<')
+    writeFileContent(resolve(__dirname, '..', '..', 'dist', `${filename}.html`), newHtml);
+    console.log('>>>**Markdown转换完成**<<<');
 }
 
 /**
@@ -86,7 +86,7 @@ function markdownHtmlTransform(path, filename = 'index', imageFile) {
  * @returns { String } 文件内容
  */
 function readFileContent(path) {
-    return fs.readFileSync(path, 'utf-8')
+    return fs.readFileSync(path, 'utf-8');
 }
 
 /**
@@ -95,7 +95,7 @@ function readFileContent(path) {
  * @param {*} content 写入文件的内容
  */
 function writeFileContent(path, content) {
-    fs.writeFileSync(path, content)
+    fs.writeFileSync(path, content);
 }
 
 /**
@@ -105,13 +105,13 @@ function writeFileContent(path, content) {
 function copyResources(folderPath, imageFile) {
     fs.readdirSync(folderPath).forEach((item) => {
         // item为文件/文件夹名字
-        const newPath = (resolve(folderPath, item)).replace(imageFile, resolve(__dirname, '..', '..', 'dist', basename(imageFile)))
+        const newPath = (resolve(folderPath, item)).replace(imageFile, resolve(__dirname, '..', '..', 'dist', basename(imageFile)));
         if (isFile(resolve(folderPath, item))) { // 如果是文件则直接读取文件
-            const fileContent = fs.readFileSync(resolve(folderPath, item))
-            writeFileContent(newPath, fileContent)
+            const fileContent = fs.readFileSync(resolve(folderPath, item));
+            writeFileContent(newPath, fileContent);
         } else {
-            fs.mkdirSync(newPath)
-            copyResources(resolve(folderPath, item), imageFile)
+            fs.mkdirSync(newPath);
+            copyResources(resolve(folderPath, item), imageFile);
         }
     })
 }
@@ -122,7 +122,7 @@ function copyResources(folderPath, imageFile) {
  * @returns { Boolean } 如果为文件则true
  */
 function isFile(path) {
-    return fs.statSync(path).isFile()
+    return fs.statSync(path).isFile();
 }
 
 /**
