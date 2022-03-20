@@ -1,8 +1,31 @@
 {
-	"scripts": {
-		"start": "node target/api.js"
-	},
-	"dependencies": {
-		"marked": "^2.1.3"
-	}
+  "name": "markdown-html-transform",
+  "description": "**v2.0.0**",
+  "version": "2.3.4",
+  "main": "target/api.js",
+  "bin": {
+    "cmt": "target/api.js"
+  },
+  "scripts": {
+    "start": "node target/api.js"
+  },
+  "devDependencies": {},
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/CodeGorgeous/Markdown-Html-Transform.git"
+  },
+  "dependencies": {
+    "commander": "^8.1.0",
+    "marked": "^2.1.3",
+    "mime-types": "^2.1.35"
+  },
+  "keywords": [
+    "markdown"
+  ],
+  "author": "CodeGorgeous",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/CodeGorgeous/Markdown-Html-Transform/issues"
+  },
+  "homepage": "https://github.com/CodeGorgeous/Markdown-Html-Transform#readme"
 }

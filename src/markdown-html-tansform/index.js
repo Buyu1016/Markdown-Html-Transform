@@ -1,6 +1,7 @@
 const fs = require('fs')
 const { resolve, basename } = require('path')
 const marked = require('marked')
+const mimeTypes = require('mime-types');
 
 /**
  * Markdown-Html-Transform主要转换函数
@@ -11,44 +12,53 @@ const marked = require('marked')
 function markdownHtmlTransform(path, filename = 'index', imageFile) {
     // path为必须
     if (!path) {
-        throw new Error('Please fill in the file path in the configuration')
+        throw new Error('Please fill in the file path in the configuration');
     }
     if (!fs.existsSync(path)) {
-        throw new Error('Please enter the correct markdown file path')
+        throw new Error('Please enter the correct markdown file path');
     }
     // 第一步应该读取各种需要的文件
     // 读取目标markdown文件内容
-    const markdownContent = readFileContent(path)
+    const markdownContent = readFileContent(path);
     // 读取模版html文件内容
-    const temeplateContent = readFileContent(resolve(__dirname, 'temeplate.html'))
+    const temeplateContent = readFileContent(resolve(__dirname, 'temeplate.html'));
     // 利用marked库将markdown转换为html
-    const renderer = {
-        index: 0,
-        index_h2: 1,
+    // 中间件1: 对h级别标签进行添加唯一值id
+    const hRender = {
         heading(text, level) {
-            if (level === 1) {
-                renderer.index_h2 = 1;
-                return `<h${level} id='item${++renderer.index}'>${text}</h${level}>\n`;
-            } else if (level === 2) {
-                return `<h${level} id='item${renderer.index}-${renderer.index_h2++}'>${text}</h${level}>\n`;
-            } else {
-                return `<h${level}>${text}</h${level}>\n`;
-            }
+            /**
+             * TODO: 需要有一个唯一id值
+             *  1: 拿出将其文本转化为base64格式作为id值
+             */
+            return `<h${level} id="${textToBase64(text)}">${text}</h${level}>`
         }
     };
-    marked.use({ renderer })
-    const htmlString = marked(markdownContent)
+    marked.use({ renderer: hRender });
+    // 中间件2: 将图片转换为base64格式放入img中的src属性中
+    const imgRender = {
+        image(href, title, text) {
+            /**
+             * TODO:
+             *  1: 将图片路径转化为绝对路径
+             *  2: 读取图片文件并以base64格式
+             *  3: 将base64格式的文件放入img标签的src中
+             */
+            return `<img src="${imageToBase64(imageFile, href)}" alt="${text}"/>`;
+        }
+    };
+    marked.use({ renderer: imgRender });
+    const htmlString = marked(markdownContent);
     // 将html插入到模版html中
-    const newHtml = temeplateContent.replace('<!-- content -->', htmlString)
+    const newHtml = temeplateContent.replace('<!-- content -->', htmlString);
     // 创建并写入
-    console.log('>>>*正在创建并写入内容*<<<')
+    console.log('>>>*正在创建并写入内容*<<<');
     fs.rmdirSync(resolve(__dirname, '..', '..', 'dist'), {
         recursive: true
     })
     console.log('>>>***正在创建文件夹***<<<')
     fs.mkdirSync(resolve(__dirname, '..', '..', 'dist'))
     fs.mkdirSync(resolve(__dirname, '..', '..', 'dist', 'css'))
-    // 复制css文件资源
+        // 复制css文件资源
     const cssContent = readFileContent(resolve(__dirname, 'css', 'markdown.css'))
     writeFileContent(resolve(__dirname, '..', '..', 'dist', 'css', 'markdown.css'), cssContent)
     if (imageFile) { // 表示是有图片文件夹的
@@ -56,14 +66,14 @@ function markdownHtmlTransform(path, filename = 'index', imageFile) {
             if (!isFile(imageFile)) { // 路径为一个文件夹
                 // 在dist中创建image文件夹
                 fs.mkdirSync(resolve(__dirname, '..', '..', 'dist', basename(imageFile)))
-                // 深度复制资源
+                    // 深度复制资源
                 copyResources(imageFile, imageFile)
-            } else {// 路径为一张图片
+            } else { // 路径为一张图片
                 const img = fs.readFileSync(imageFile)
                 writeFileContent(resolve(__dirname, '..', '..', 'dist', basename(imageFile)), img)
             }
         } else {
-            throw new Error ('The picture folder path is incorrect')
+            throw new Error('The picture folder path is incorrect')
         }
     }
     writeFileContent(resolve(__dirname, '..', '..', 'dist', `${filename}.html`), newHtml)
@@ -113,6 +123,28 @@ function copyResources(folderPath, imageFile) {
  */
 function isFile(path) {
     return fs.statSync(path).isFile()
+}
+
+/**
+ * 用于将一小段标题文本转化为base64格式
+ * @param {*} text 
+ */
+function textToBase64(text) {
+    return Buffer.from(text).toString('base64');
+}
+
+/**
+ * 用于将图片转化为base64格式
+ * @param {*} baseImageFilePath 图片基础路径
+ * @param {*} href 图片路径
+ * @returns base64字符串
+ */
+function imageToBase64(baseImageFilePath, href) {
+    const newPath = resolve(baseImageFilePath, '..', href);
+    // 此处获取的base64并不是一个完整的base64编码, 缺少了图片类型
+    const base64Img = fs.readFileSync(newPath).toString('base64');
+    const imgType = mimeTypes.lookup(newPath);
+    return `data:${imgType};base64,${base64Img}`;
 }
 
 
