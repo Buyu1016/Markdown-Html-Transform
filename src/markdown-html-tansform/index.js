@@ -1,5 +1,5 @@
 const fs = require('fs')
-const { resolve, basename } = require('path')
+const { resolve } = require('path')
 const marked = require('marked')
 const mimeTypes = require('mime-types');
 
@@ -26,10 +26,6 @@ function markdownHtmlTransform(path, filename = 'index', imageFile) {
     // 中间件1: 对h级别标签进行添加唯一值id
     const hRender = {
         heading(text, level) {
-            /**
-             * TODO: 需要有一个唯一id值
-             *  1: 拿出将其文本转化为base64格式作为id值
-             */
             return `<h${level} id="${textToBase64(text)}">${text}</h${level}>`
         }
     };
@@ -37,45 +33,24 @@ function markdownHtmlTransform(path, filename = 'index', imageFile) {
     // 中间件2: 将图片转换为base64格式放入img中的src属性中
     const imgRender = {
         image(href, title, text) {
-            /**
-             * TODO:
-             *  1: 将图片路径转化为绝对路径
-             *  2: 读取图片文件并以base64格式
-             *  3: 将base64格式的文件放入img标签的src中
-             */
             return `<img src="${imageToBase64(imageFile, href)}" alt="${text}"/>`;
         }
     };
     marked.use({ renderer: imgRender });
     const htmlString = marked(markdownContent);
     // 将html插入到模版html中
-    const newHtml = temeplateContent.replace('<!-- content -->', htmlString);
+    let newHtml = temeplateContent.replace('<!-- content -->', htmlString);
+    // 将css资源插入html中
+    const cssContent = readFileContent(resolve(__dirname, 'css', 'markdown.css'));
+    newHtml = newHtml.replace('/*style*/', cssContent);
     // 创建并写入
     console.log('>>>*正在创建并写入内容*<<<');
     fs.rmdirSync(resolve(__dirname, '..', '..', 'dist'), {
         recursive: true
     })
-    console.log('>>>***正在创建文件夹***<<<')
-    fs.mkdirSync(resolve(__dirname, '..', '..', 'dist'))
-    fs.mkdirSync(resolve(__dirname, '..', '..', 'dist', 'css'))
-        // 复制css文件资源
-    const cssContent = readFileContent(resolve(__dirname, 'css', 'markdown.css'))
-    writeFileContent(resolve(__dirname, '..', '..', 'dist', 'css', 'markdown.css'), cssContent)
-    if (imageFile) { // 表示是有图片文件夹的
-        if (fs.existsSync(imageFile)) { // 查看文件夹路径是否正确
-            if (!isFile(imageFile)) { // 路径为一个文件夹
-                // 在dist中创建image文件夹
-                fs.mkdirSync(resolve(__dirname, '..', '..', 'dist', basename(imageFile)))
-                    // 深度复制资源
-                copyResources(imageFile, imageFile)
-            } else { // 路径为一张图片
-                const img = fs.readFileSync(imageFile)
-                writeFileContent(resolve(__dirname, '..', '..', 'dist', basename(imageFile)), img)
-            }
-        } else {
-            throw new Error('The picture folder path is incorrect')
-        }
-    }
+    console.log('>>>***正在创建文件中***<<<')
+    fs.mkdirSync(resolve(__dirname, '..', '..', 'dist'));
+    // TODO: 研究一下如何压缩代码
     writeFileContent(resolve(__dirname, '..', '..', 'dist', `${filename}.html`), newHtml);
     console.log('>>>**Markdown转换完成**<<<');
 }
@@ -96,33 +71,6 @@ function readFileContent(path) {
  */
 function writeFileContent(path, content) {
     fs.writeFileSync(path, content);
-}
-
-/**
- * 递归复制资源
- * @param { Stiring } folderPath 文件夹路径 
- */
-function copyResources(folderPath, imageFile) {
-    fs.readdirSync(folderPath).forEach((item) => {
-        // item为文件/文件夹名字
-        const newPath = (resolve(folderPath, item)).replace(imageFile, resolve(__dirname, '..', '..', 'dist', basename(imageFile)));
-        if (isFile(resolve(folderPath, item))) { // 如果是文件则直接读取文件
-            const fileContent = fs.readFileSync(resolve(folderPath, item));
-            writeFileContent(newPath, fileContent);
-        } else {
-            fs.mkdirSync(newPath);
-            copyResources(resolve(folderPath, item), imageFile);
-        }
-    })
-}
-
-/**
- * 判别一个文件信息是否为文件
- * @param { String } path 文件/文件路径 
- * @returns { Boolean } 如果为文件则true
- */
-function isFile(path) {
-    return fs.statSync(path).isFile();
 }
 
 /**
