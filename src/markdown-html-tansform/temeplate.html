@@ -26,7 +26,6 @@
     </div>
     <!-- 回到顶部按钮 -->
     <div class="backTop">Top</div>
-    <script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script>
         /**
          * TODO: 获取所有h1和h2标签
@@ -34,57 +33,62 @@
          *  2: 可以根据id值进行对元素进行筛选
          *  3: 筛选出的元素应该是具有一定的顺序然后正常渲染到侧边栏即可
          */
-        const oH1s = $('h1');
-        const oH2s = $('h2');
-        const sidebar = $('.sidebar-content')
-        let createAs = ''
+        const sidebar = document.querySelector('.sidebar-content')
+        let createAs = []
         let index = 1
-        const oDomAll = $('.content *');
+        const oDomAll = document.querySelectorAll('.content *');
         let oIdDom = [];
         for (let i = 0; i < oDomAll.length; i++) {
-            if ($(oDomAll[i]).attr('id')) {
+            if (typeof oDomAll[i].getAttribute('id') == 'string') {
                 oIdDom.push(oDomAll[i]);
-                createAs += `<div><a class="${oDomAll[i].localName}" href='#${$(oDomAll[i]).attr('id')}'>${oDomAll[i].outerText}</a></div>`
+                const oDivContainer = document.createElement('div');
+                const oAContainer = document.createElement('a');
+                oAContainer.href = '#' + oDomAll[i].getAttribute('id');
+                oAContainer.classList.add(oDomAll[i].localName);
+                oAContainer.innerText = oDomAll[i].outerText;
+                oDivContainer.append(oAContainer);
+                createAs.push(oDivContainer);
             }
         }
-        sidebar.eq(0).append(createAs);
+        sidebar.append(...createAs);
 
         // 控制侧边栏显示与隐藏
-        const oLock = $('.loading-lock')
-        const oSideBar = $('.sidebar')
-        const oContent = $('.content')
+        const oLock = document.querySelector('.loading-lock')
+        const oSideBar = document.querySelector('.sidebar')
+        const oContent = document.querySelector('.content')
 
         let lock = false // 默认侧边栏不显示
-        oLock.on('click', () => {
+        oLock.addEventListener('click', () => {
             if (!lock) { // 缩小
-                oSideBar.css('left', '0')
-                oContent.css('margin-left', '300px')
-                oLock.text('<< 隐藏')
+                oSideBar.style.left = '0'
+                oContent.style.marginLeft = '300px'
+                oLock.innerText = '<< 隐藏';
                 lock = true
             } else {
-                oSideBar.css('left', '-300px')
-                oContent.css('margin-left', '0')
-                oLock.text('展开 >>')
+                oSideBar.style.left = '-300px'
+                oContent.style.marginLeft = '0'
+                oLock.innerText = '展开 >>';
                 lock = false
             }
-        })
-
+        });
+        // TODO: 待修改区域
         // 设置侧边栏默认选中
-        if ($('a')) {
-            $($('a')[0]).css('color', '#ff6600');
+        if (document.querySelectorAll('.sidebar-content a').length) {
+            document.querySelectorAll('.sidebar-content a')[0].style.color = '#ff6600';
         }
 
         // 回到顶部
-        let oAs = $('.sidebar-content a')
+        let oAs = document.querySelectorAll('.sidebar-content a')
         let windowHeight = window.innerHeight;
         let scrollTop;
         let current;
+        let backTop = document.querySelector('.backTop');
         window.addEventListener('scroll', (e) => {
-            scrollTop = $(document).scrollTop();
+            scrollTop = document.querySelector('html').scrollTop;
             if (scrollTop - windowHeight > 100) {
-                $('.backTop').css('display', 'inline-block')
+                backTop.style.display = 'inline-block'
             } else {
-                $('.backTop').css('display', 'none')
+                backTop.style.display = 'none'
             }
             // 侧边栏某个元素是否亮起
             const htmlScroolTop = []
@@ -101,8 +105,7 @@
             current.style.color = '#ff6600'
         })
 
-
-        $('.backTop').on('click', () => {
+        backTop.addEventListener('click', () => {
             let timer = null;
             if (scrollTop - windowHeight > 100) { // 说明现在不处于页面顶部，点击应该scroll为0
                 const timeAll = 100; // 1s内3步移动到顶部
@@ -110,13 +113,13 @@
                 timer = setInterval(() => {
                     if (scrollTop <= 0) {
                         scrollTop = 0
-                        $(document).scrollTop(scrollTop)
+                        scrollTop = document.querySelector('html').scrollTop;
                         clearInterval(timer)
                     } else {
                         scrollTop = scrollTop - distance;
-                        $(document).scrollTop(scrollTop)
+                        document.querySelector('html').scrollTop = scrollTop;
                     }
-                }, 1000 / timeAll);
+                }, 500 / timeAll);
             }
         })
     </script>

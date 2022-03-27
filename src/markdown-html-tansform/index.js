@@ -51,6 +51,9 @@ function markdownHtmlTransform(path, filename = 'index', imageFile) {
     console.log('>>>***正在创建文件中***<<<')
     fs.mkdirSync(resolve(__dirname, '..', '..', 'dist'));
     // TODO: 研究一下如何压缩代码
+    // TODO: 目前以56行的替换空格的方式有问题, 文件展示会不正确
+    console.log('>>>***正在压缩文件中***<<<');
+    newHtml = newHtml.replace(/\r/g, '');
     writeFileContent(resolve(__dirname, '..', '..', 'dist', `${filename}.html`), newHtml);
     console.log('>>>**Markdown转换完成**<<<');
 }
