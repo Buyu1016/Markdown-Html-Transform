@@ -1,3 +1,16 @@
+html {
+    scroll-behavior: smooth;
+}
+
+::-webkit-scrollbar {
+    width: 0.4rem;
+}
+
+::-webkit-scrollbar-thumb {
+    background-color: #abcdef;
+    border-radius: 1rem;
+}
+
 body {
     margin: 0 auto;
     font-family: "ubuntu", "Tahoma", "Microsoft YaHei", arial, sans-serif;
@@ -15,7 +28,6 @@ img {
 @media screen and (min-width: 1000px) {
     body {
         width: 842px;
-        margin: 10px auto;
     }
 }
 
@@ -287,13 +299,17 @@ body {
 
 .sidebar-content {
     width: 100%;
-    height: 100%;
+    height: calc(100% - 2.5rem);
     box-sizing: border-box;
     padding: 10px 0 0 20px;
+    overflow: hidden auto;
 }
 
 .sidebar-content div {
     margin: 5px 0px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap
 }
 
 .sidebar-content div .h1 {
@@ -303,6 +319,10 @@ body {
 .sidebar-content div .h2 {
     font-size: 16px;
     margin-left: 25px;
+}
+
+.sidebar-content a {
+    transition: color .5s;
 }
 
 

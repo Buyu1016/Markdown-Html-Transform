@@ -89,3 +89,12 @@ markdownHtmlTransform(resolve(__dirname, 'index.md'), 'index', resolve(__dirname
 - 彻底更改文件生成, 将所有文件浓缩为一个HTML文件
 - 图片统一使用base64格式存储与HTML文件内部
 - 采用原生Js操作DOM方式, 舍弃Jquery操作DOM的方式
+
+> v2.1.1
+> 2022-07-08
+
+**更新内容:**
+
+- 调整滚动条样式
+- 调整滚动条为平滑滚动
+- 修复侧边栏没有滚动条问题

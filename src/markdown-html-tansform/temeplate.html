@@ -104,23 +104,9 @@
             }
             current.style.color = '#ff6600'
         })
-
+        // 回到顶部
         backTop.addEventListener('click', () => {
-            let timer = null;
-            if (scrollTop - windowHeight > 100) { // 说明现在不处于页面顶部，点击应该scroll为0
-                const timeAll = 100; // 1s内3步移动到顶部
-                const distance = scrollTop / timeAll;
-                timer = setInterval(() => {
-                    if (scrollTop <= 0) {
-                        scrollTop = 0
-                        scrollTop = document.querySelector('html').scrollTop;
-                        clearInterval(timer)
-                    } else {
-                        scrollTop = scrollTop - distance;
-                        document.querySelector('html').scrollTop = scrollTop;
-                    }
-                }, 500 / timeAll);
-            }
+            document.querySelector('html').scrollTop = 0;
         })
     </script>
 </body>
